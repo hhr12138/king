@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    username: root
+    password: hhr12138
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/common?serverTimezone=GMT%2B8&characterEncoding=utf8&useUnicode=true
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: del  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: true # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: false # 逻辑未删除值(默认为 0)
+  configuration:
+    cache-enabled: true
+    map-underscore-to-camel-case: true
+  type-aliases-package: cn.edu.zut.hhr.entity
+server:
+  port: 8888
+dubbo:
+  application:
+    name: common.storage.king
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    id: zk-registry
+    address: zookeeper://120.46.194.37:2181
+  config-center:
+    address: zookeeper://120.46.194.37:2181
+  metadata-report:
+    address: zookeeper://120.46.194.37:2181

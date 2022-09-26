@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common.storage.king.mapper.LogMapper">
+
+    <insert id="insertBatch">
+        <if test="logs != null and logs.size != 0">
+            insert into `log` values
+            <foreach collection="logs" item="log" separator=",">
+                (null, #{log.userId}, #{log.requestId}, #{log.PSM}, #{log.level}, #{log.context}, #{log.del}, #{log.gmtCreate}, #{log.gmtModified})
+            </foreach>
+        </if>
+    </insert>
+    <delete id="realDelete">
+        delete
+        from `log`
+        where `log`.`gmt_create` <![CDATA["<="]]> #{removeTime}
+    </delete>
+</mapper>
