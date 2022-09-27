@@ -20,7 +20,7 @@ public interface LogService extends IService<Log> {
     //物理删除X天前的日志
     RestResponse<Integer> realDeleteLogsGeneratedXDayAgo(int x);
     //根据requestId查询指定时间范围内的日志, 不传时间意味着无限制
-    RestResponse<List<Log>> selectLogsByRequestId(Long requestId, long startTime, long endTime, int size);
+    RestResponse<List<Log>> selectLogsByRequestId(String requestId, long startTime, long endTime, int size);
     //查询X分钟内的日志
     RestResponse<List<Log>> selectLogsGeneratedXMin(int x);
     //根据UserId查询指定时间范围内的日志, 不传时间无限制

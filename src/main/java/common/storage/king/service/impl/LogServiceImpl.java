@@ -46,7 +46,7 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
     }
 
     @Override
-    public RestResponse<List<Log>> selectLogsByRequestId(Long requestId, long startTime, long endTime, int size) {
+    public RestResponse<List<Log>> selectLogsByRequestId(String requestId, long startTime, long endTime, int size) {
         LambdaQueryWrapper<Log> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(Log::getRequestId,requestId);
         if(endTime != 0){
