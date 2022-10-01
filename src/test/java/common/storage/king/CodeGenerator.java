@@ -139,9 +139,10 @@ public class CodeGenerator {
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");
+        TableFill tableFill0 = new TableFill("del",FieldFill.INSERT);
         TableFill tableFill = new TableFill("gmt_create", FieldFill.INSERT);
         TableFill tableFill1 = new TableFill("gmt_modified",FieldFill.INSERT_UPDATE);
-        List<TableFill> list1 = Lists.list(tableFill,tableFill1);
+        List<TableFill> list1 = Lists.list(tableFill,tableFill1,tableFill0);
         strategy.setTableFillList(list1);
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
