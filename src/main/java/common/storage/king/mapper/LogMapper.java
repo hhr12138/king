@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2022-09-19
  */
 public interface LogMapper extends SpiceMapper<Log> {
-    Integer insertBatch(@Param("logs") List<Log> logs);
+    Integer insertBatch(List<Log> logs);
 
     int realDelete(@Param("removeTime") long removeTime);
 }

@@ -35,7 +35,6 @@ class LogServiceImplTest {
     void insertLogs() {
         List<Log> logs = new ArrayList<>();
         Log log = new Log(123L,"haha","common.log.test","warn","test 哈哈, 你好啊");
-        logService.save(log);
         for(int i = 0; i < 100; i++){
             logs.add(log);
         }

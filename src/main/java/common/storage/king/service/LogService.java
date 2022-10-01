@@ -16,6 +16,7 @@ import java.util.List;
  * @since 2022-09-19
  */
 public interface LogService extends IService<Log> {
+    RestResponse<Integer> insertLogStrs(String logsStr);
     RestResponse<Integer> insertLogs(List<Log> logs);
     //物理删除X天前的日志
     RestResponse<Integer> realDeleteLogsGeneratedXDayAgo(int x);

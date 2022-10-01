@@ -16,9 +16,7 @@ import javax.annotation.Resource;
 public class KingApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext run = SpringApplication.run(KingApplication.class, args);
-        LogService logService = run.getBean(LogService.class);
-        System.out.println(logService.getClass().getName());
+        SpringApplication.run(KingApplication.class, args);
     }
 
 }

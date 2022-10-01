@@ -1,11 +1,14 @@
 package common.storage.king.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.toolkit.BeanUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import common.entity.valhalla.vo.RestResponse;
+import common.storage.king.config.AppConfig;
 import common.storage.king.entity.Log;
 import common.storage.king.mapper.LogMapper;
 import common.storage.king.service.LogService;
@@ -14,6 +17,8 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +36,24 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
 
     @Resource
     private LogMapper logMapper;
+    private ObjectMapper objectMapper = new ObjectMapper();
+    private TypeReference<List<Log>> logListType = new TypeReference<List<Log>>() {
+        @Override
+        public Type getType() {
+            return super.getType();
+        }
+    };
+    @Override
+    public RestResponse<Integer> insertLogStrs(String logsStr) {
+        List<Log> logs = null;
+        try {
+            logs = objectMapper.readValue(logsStr, logListType);
+        } catch (JsonProcessingException e) {
+            logs = Arrays.asList(new Log(-1L,"-1", AppConfig.PSM,"error","decode error: "+ e.getMessage()));
+        }
+        int result = logMapper.insertBatch(logs);
+        return RestResponse.success(result);
+    }
 
     @Override
     public RestResponse<Integer> insertLogs(List<Log> logs) {

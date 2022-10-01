@@ -22,6 +22,7 @@ dubbo:
   protocol:
     name: dubbo
     port: -1
+    optimizer: common.storage.king.config.SerializationOptimizerImpl
   registry:
     id: zk-registry
     address: zookeeper://120.46.194.37:2181
