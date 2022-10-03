@@ -55,11 +55,11 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
         return RestResponse.success(result);
     }
 
-    @Override
-    public RestResponse<Integer> insertLogs(List<Log> logs) {
-        int result = logMapper.insertBatch(logs);
-        return RestResponse.success(result);
-    }
+//    @Override
+//    public RestResponse<Integer> insertLogs(List<Log> logs) {
+//        int result = logMapper.insertBatch(logs);
+//        return RestResponse.success(result);
+//    }
 
     @Override
     public RestResponse<Integer> realDeleteLogsGeneratedXDayAgo(int x) {
@@ -69,7 +69,7 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
     }
 
     @Override
-    public RestResponse<List<Log>> selectLogsByRequestId(String requestId, long startTime, long endTime, int size) {
+    public RestResponse<List<Log>> selectLogsByRequestId(String requestId, long startTime, long endTime) {
         LambdaQueryWrapper<Log> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(Log::getRequestId,requestId);
         if(endTime != 0){

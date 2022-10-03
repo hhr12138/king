@@ -32,16 +32,6 @@ class LogServiceImplTest {
     private UserService userService;
 
     @Test
-    void insertLogs() {
-        List<Log> logs = new ArrayList<>();
-        Log log = new Log(123L,"haha","common.log.test","warn","test 哈哈, 你好啊");
-        for(int i = 0; i < 100; i++){
-            logs.add(log);
-        }
-        logService.insertLogs(logs);
-    }
-
-    @Test
     void realDeleteLogsGeneratedXDayAgo() {
         userService.save(new User());
     }
