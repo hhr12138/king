@@ -13,7 +13,6 @@ import common.storage.king.entity.Log;
 import common.storage.king.mapper.LogMapper;
 import common.storage.king.service.LogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,7 +30,6 @@ import java.util.concurrent.TimeUnit;
  * @since 2022-09-19
  */
 @Service
-@DubboService
 public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogService {
 
     @Resource
@@ -55,11 +53,11 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
         return RestResponse.success(result);
     }
 
-//    @Override
-//    public RestResponse<Integer> insertLogs(List<Log> logs) {
-//        int result = logMapper.insertBatch(logs);
-//        return RestResponse.success(result);
-//    }
+    @Override
+    public RestResponse<Integer> insertLogs(List<Log> logs) {
+        int result = logMapper.insertBatch(logs);
+        return RestResponse.success(result);
+    }
 
     @Override
     public RestResponse<Integer> realDeleteLogsGeneratedXDayAgo(int x) {
