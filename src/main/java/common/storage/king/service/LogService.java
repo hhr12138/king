@@ -3,7 +3,6 @@ package common.storage.king.service;
 import common.entity.valhalla.vo.RestResponse;
 import common.storage.king.entity.Log;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.apache.dubbo.config.annotation.DubboReference;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public interface LogService extends IService<Log> {
     RestResponse<Integer> insertLogStrs(String logsStr);
-//    RestResponse<Integer> insertLogs(List<Log> logs);
+    RestResponse<Integer> insertLogs(List<Log> logs);
     //物理删除X天前的日志
     RestResponse<Integer> realDeleteLogsGeneratedXDayAgo(int x);
     //根据requestId查询指定时间范围内的日志, 不传时间意味着无限制
