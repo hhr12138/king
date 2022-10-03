@@ -3,9 +3,7 @@ package common.storage.king.controller;
 import common.entity.valhalla.vo.RestResponse;
 import common.storage.king.entity.Log;
 import common.storage.king.service.LogService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,27 +12,38 @@ import java.util.List;
 public class LogController {
     @Resource
     private LogService logService;
-    @PostMapping("/insertLogs")
-    RestResponse<Integer> insertLogStrs(String logsStr){
+
+    @PostMapping("/insertLogsStr")
+    RestResponse<Integer> insertLogsStr(@RequestParam("logsStr") String logsStr) {
         return logService.insertLogStrs(logsStr);
     }
-        RestResponse<Integer> insertLogs(List<Log> logs){
+
+    @PostMapping("/insertLogs")
+    RestResponse<Integer> insertLogs(@RequestBody List<Log> logs) {
         return logService.insertLogs(logs);
-        }
+    }
+
     //物理删除X天前的日志
-    RestResponse<Integer> realDeleteLogsGeneratedXDayAgo(int x){
+    @PostMapping("/realDeleteLogsGeneratedXDayAgo")
+    RestResponse<Integer> realDeleteLogsGeneratedXDayAgo(@RequestParam("x") int x) {
         return logService.realDeleteLogsGeneratedXDayAgo(x);
-    };
+    }
+
     //根据requestId查询指定时间范围内的日志, 不传时间意味着无限制
-    RestResponse<List<Log>> selectLogsByRequestId(String requestId, long startTime, long endTime){
-        return logService.selectLogsByRequestId(requestId,startTime,endTime);
-    };
+    @GetMapping("/selectLogsByRequestId/{requestId}/{startTime}/{endTime}")
+    RestResponse<List<Log>> selectLogsByRequestId(@PathVariable("requestId") String requestId, @PathVariable("startTime") long startTime, @PathVariable("endTime") long endTime) {
+        return logService.selectLogsByRequestId(requestId, startTime, endTime);
+    }
+
     //查询X分钟内的日志
-    RestResponse<List<Log>> selectLogsGeneratedXMin(int x){
+    @GetMapping("/selectLogsGeneratedXMin/{x}")
+    RestResponse<List<Log>> selectLogsGeneratedXMin(@PathVariable("x") int x) {
         return logService.selectLogsGeneratedXMin(x);
-    };
+    }
+
     //根据UserId查询指定时间范围内的日志, 不传时间无限制
-    RestResponse<List<Log>> selectLogsByUserId(Long userId, long startTime, long endTime,int pageCnt, int size){
-        return logService.selectLogsByUserId(userId,startTime,endTime,pageCnt,size);
-    };
+    @GetMapping("selectLogsByUserId/{userId}/{startTime}/{endTime}/{pageCnt}/{size}")
+    RestResponse<List<Log>> selectLogsByUserId(@PathVariable("userId") Long userId,@PathVariable("startTime") long startTime,@PathVariable("endTime") long endTime,@PathVariable(value = "pageCnt",required = false) int pageCnt,@PathVariable(value = "size",required = false) int size) {
+        return logService.selectLogsByUserId(userId, startTime, endTime, pageCnt, size);
+    }
 }
