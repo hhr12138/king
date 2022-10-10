@@ -22,6 +22,8 @@ import lombok.EqualsAndHashCode;
 public class Permission implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @TableId
+    private Long id;
 
     private Long companyId;
 

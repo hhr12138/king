@@ -2,6 +2,9 @@ package common.storage.king.mapper;
 
 import common.storage.king.entity.NeedPermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import common.storage.king.entity.Permission;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2022-10-01
  */
 public interface NeedPermissionMapper extends BaseMapper<NeedPermission> {
-
+    List<Permission> getPermissions(NeedPermission needPermission);
 }
