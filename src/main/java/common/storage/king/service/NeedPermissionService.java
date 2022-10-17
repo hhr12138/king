@@ -17,4 +17,6 @@ import java.util.List;
  */
 public interface NeedPermissionService extends IService<NeedPermission> {
     RestResponse<List<Permission>> getPermissions(NeedPermission needPermission);
+
+    RestResponse<Long> insertNeedPermission(NeedPermission needPermission);
 }

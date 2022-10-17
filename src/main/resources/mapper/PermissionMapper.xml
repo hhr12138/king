@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="common.storage.king.mapper.PermissionMapper">
 
+    <insert id="addPermissionToRole">
+        <if test="permissionIds != null and permissionIds.size != 0">
+            insert into `tb_role_permission`(`role_id`,`permission_id`) values
+            <foreach collection="permissionIds" item="permissionId" separator=",">
+                (#{roleId},#{permissionId})
+            </foreach>
+        </if>
+    </insert>
+    <insert id="addPermissionToUser">
+        <if test="permissionIds != null and permissionIds.size != 0">
+            insert into `tb_user_permission`(`user_id`,`permission_id`) values
+            <foreach collection="permissionIds" item="permissionId" separator=",">
+                (#{userId},#{permissionId})
+            </foreach>
+        </if>
+    </insert>
+    <insert id="addPermissionToNeedPermission">
+        <if test="permissionIds != null and permissionIds.size != 0">
+            insert into `tb_need_permission_permission`(`need_permission_id`,`permission_id`) values
+            <foreach collection="permissionIds" item="permissionId" separator=",">
+                (#{needPermissionId},#{permissionId})
+            </foreach>
+        </if>
+    </insert>
 </mapper>

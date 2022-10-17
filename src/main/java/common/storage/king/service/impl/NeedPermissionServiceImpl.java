@@ -6,7 +6,6 @@ import common.storage.king.entity.Permission;
 import common.storage.king.mapper.NeedPermissionMapper;
 import common.storage.king.service.NeedPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import common.storage.king.service.PermissionService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +29,12 @@ public class NeedPermissionServiceImpl extends ServiceImpl<NeedPermissionMapper,
         }
         List<Permission> permissions = this.baseMapper.getPermissions(needPermission);
         return RestResponse.success(permissions);
+    }
+
+    @Override
+    public RestResponse<Long> insertNeedPermission(NeedPermission needPermission) {
+        boolean success = baseMapper.insert(needPermission)==1;
+        if(success) return RestResponse.success(needPermission.getId());
+        return RestResponse.fail("[insertNeedPermission] insert fail");
     }
 }

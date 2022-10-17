@@ -3,6 +3,7 @@ package common.storage.king.service.impl;
 import common.storage.king.entity.User;
 import common.storage.king.service.UserService;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;

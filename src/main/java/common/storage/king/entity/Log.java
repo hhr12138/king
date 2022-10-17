@@ -23,6 +23,8 @@ import org.springframework.boot.context.properties.bind.Name;
 public class Log implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     private Long userId;
 

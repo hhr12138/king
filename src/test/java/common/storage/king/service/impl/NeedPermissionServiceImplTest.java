@@ -23,4 +23,10 @@ class NeedPermissionServiceImplTest {
         System.out.println(service.getPermissions(commonPermission));
         System.out.println(service.getPermissions(nullPermission).toString());
     }
+
+    @Test
+    void insertNeedPermission() {
+        NeedPermission commonPermission = new NeedPermission("test","test1",-1L,-1L);
+        System.out.println(service.insertNeedPermission(commonPermission));
+    }
 }

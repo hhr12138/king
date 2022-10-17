@@ -6,8 +6,11 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -18,10 +21,15 @@ import lombok.EqualsAndHashCode;
  * @since 2022-10-01
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     private Long companyId;
 
@@ -39,5 +47,9 @@ public class Role implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long gmtModified;
 
-
+    public Role(Long companyId, Long departmentId, String roleName) {
+        this.companyId = companyId;
+        this.departmentId = departmentId;
+        this.roleName = roleName;
+    }
 }
