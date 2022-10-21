@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="common.storage.king.mapper.RoleMapper">
 
+    <insert id="addRolesToUser">
+        <if test="roleIds != null and roleIds.size != 0">
+            insert into `tb_user_role`(`user_id`,`role_id`) values
+            <foreach collection="roleIds" item="roleId" separator=",">
+                (#{userId},#{roleId})
+            </foreach>
+        </if>
+    </insert>
+    <insert id="addRolesToCompany">
+        <if test="roleIds != null and roleIds.size != 0">
+            insert into `tb_company_role`(`company_id`,`role_id`) values
+            <foreach collection="roleIds" item="roleId" separator=",">
+                (#{companyId},#{roleId})
+            </foreach>
+        </if>
+    </insert>
+    <insert id="addRolesToDepartment">
+        <if test="roleIds != null and roleIds.size != 0">
+            insert into `tb_department_role`(`department_id`,`role_id`) values
+            <foreach collection="roleIds" item="roleId" separator=",">
+                (#{departmentId},#{roleId})
+            </foreach>
+        </if>
+    </insert>
 </mapper>

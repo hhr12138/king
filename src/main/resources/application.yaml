@@ -13,7 +13,7 @@ mybatis-plus:
   configuration:
     cache-enabled: true
     map-underscore-to-camel-case: true
-  type-aliases-package: cn.edu.zut.hhr.entity
+  type-aliases-package: common.storage.king.entity
 server:
   port: 8888
 dubbo:

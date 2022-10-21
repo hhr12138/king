@@ -2,4 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="common.storage.king.mapper.UserMapper">
 
+    <select id="getUserPermissions" resultType="Permission">
+        select `id`,`company_id`,`department_id`,`permission`
+        from `permission`
+        where `id` in
+        (
+            select `permission_id`
+            from `tb_user_permission`
+            where `user_id`=#{id} and !`del`
+            union
+            select `permission_id`
+            from `tb_role_permission`
+            where `role_id` in
+            (
+                select `role_id`
+                from `tb_user_role`
+                where `user_id`=#{id} and !`del`
+                union
+                select `role_id`
+                from `tb_company_role`
+                where `company_id` in(
+                    select `company_id`
+                    from `tb_user_company_department`
+                    where `user_id`=#{id} and !`del`
+                ) and !`del`
+                union
+                select `role_id`
+                from `tb_department_role`
+                where `department_id` in(
+                    select `department_id`
+                    from `tb_user_company_department`
+                    where `user_id`=#{id} and !`del`
+                ) and !`del`
+            )and !`del`
+        ) and !`del`
+    </select>
 </mapper>

@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="common.storage.king.mapper.NeedPermissionMapper">
 
+    <select id="getPermissions" resultType="Permission">
+        select `id`, `permission`
+        from `permission`
+        where !`del` and `id` in
+        (
+            select `permission_id`
+            from `tb_need_permission_permission`
+            where !`del` and `need_permission_id` in
+            (
+                select `id`
+                from `need_permission`
+                where `PSM`=#{psm} and `company_id`=#{companyId} and `department_id`=#{departmentId} and `methor_or_data`=#{methorOrData} and !`del`
+            )
+        )
+    </select>
 </mapper>

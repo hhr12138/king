@@ -1,7 +1,11 @@
 package common.storage.king.service;
 
+import common.entity.valhalla.vo.RestResponse;
+import common.storage.king.entity.Permission;
 import common.storage.king.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
+    RestResponse<List<Permission>> getUserPermissions(User user);
 }
